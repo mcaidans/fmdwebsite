@@ -1,0 +1,141 @@
+.greencode{
+    background-color: #07AD4D;
+    color:white;
+}
+
+a.nav-link{
+    color:white;
+}
+
+.footer-link-list{
+    list-style:none;
+    width:200px;
+    margin:auto;
+    text-align:left;
+}
+
+.footer-cols{
+    margin-top:10px;
+}
+
+.footer-link{
+    color: white;
+    text-decoration: underline;
+    font-weight:100;
+}
+
+.container{
+    padding:0px;
+}
+.card{
+    margin-bottom:15px;
+}
+.call-box{
+    background-color:#ececec;
+    font-weight:800;
+    padding:20px;
+    border-radius:4px;
+}
+.navbar{
+    margin-bottom:15px;    
+} 
+.app-badge{
+    height: 50px;
+    width:auto;
+}
+.icons{
+    text-decoration: none!important;
+}
+.center-text{
+    text-align: center;
+}
+ul.center-text{
+    text-align:left;   
+}
+.modal-body{
+    padding:0;
+    text-align: center;
+}
+
+.card-body{
+    padding:0px;
+    padding-top:5px;
+}
+
+.row{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+@media (min-width: 576px){
+    .navbar-expand-lg {
+        -ms-flex-flow: row nowrap;
+        flex-flow: row nowrap;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+    }
+    .navbar-expand-lg .navbar-toggler {
+        display: none;
+    }
+    .navbar-expand-lg .navbar-collapse {
+        display: -ms-flexbox!important;
+        display: flex!important;
+        -ms-flex-preferred-size: auto;
+        flex-basis: auto;
+    }
+    .navbar-expand-lg .navbar-nav {
+        -ms-flex-direction: row;
+        flex-direction: row;
+    }
+    .navbar-expand-lg .navbar-nav .nav-link {
+        padding-right: .5rem;
+        padding-left: .5rem;
+    }
+    .mb-lg-0, .my-lg-0 {
+        margin-bottom: 0!important;
+    }
+    .mt-lg-0, .my-lg-0 {
+        margin-top: 0!important;
+    }
+    .navbar-expand-lg {
+        -ms-flex-flow: row nowrap;
+        flex-flow: row nowrap;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+    }
+    
+}
+
+@media (max-width:576px){
+    .responsive-center{
+        justify-content: center!important;
+    }
+}
+
+/* Dropdown Login */
+.dropdown-toggle{
+     color:white;   
+}
+.login-dp{
+    margin-top:10px;
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+}
+.login-dp .help-block{
+    font-size:12px    
+}
+.login-dp .bottom{
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px;
+}
+.login-dp .social-buttons{
+    margin:12px 0    
+}
+.login-dp .social-buttons a{
+    width: 49%;
+}
+.login-dp .form-group {
+    margin-bottom: 10px;
+}
