@@ -2,81 +2,52 @@
 
 @section('content')
 
-<h2>Meal Deals</h2>
 <div class="row responsive-center">
-@for ($i = 0; $i < 7; $i++)
-    <div class="col-sm-4 col-lg-3 col-xl-2">
-        <div class="card" style=";margin-right:15px;padding:5px;">
-            <a href="#exampleModal" role="button" data-toggle="modal">
-                <img class="card-img-top" class="img-fluid" src="../storage/app/{{ $vouchers[0]->image_location }}" alt='{{$vouchers[0]->name}}'>
-            </a>
-            <div class="card-body text-center">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                  Open Voucher
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ $vouchers[0]->name }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <img src="../storage/app/{{ $vouchers[0]->image_location }}" class="img-fluid" alt='{{$vouchers[0]->name}}'>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Redeem</button>
+    @if(!empty($vouchers))
+        @foreach($vouchers as $voucher) 
+            <div class="col-sm-6 col-lg-4 col-xl-3">
+                <div class="card" style=";margin-right:15px;padding:5px;">
+                    <a href="#voucher{{$voucher->id}}" role="button" data-toggle="modal">
+                        <img class="card-img-top" class="img-fluid" src="../storage/app/{{ $voucher->image_location }}" alt='{{$voucher->name}}'>
+                    </a>
+                    <div class="card-body text-center">
+                        <button type="button" class="btn greencode" data-toggle="modal" data-target="#voucher{{$voucher->id}}">Open Voucher</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-@endfor
+            
+            <div class="modal fade" id="voucher{{$voucher->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <!-- <h5 class="modal-title" id="exampleModalLabel">{{ $voucher->name }}</h5> -->
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <img src="../storage/app/{{ $voucher->image_location }}" class="img-fluid" alt='{{$voucher->name}}'>
+                        </div>
+                        <div class="modal-footer">
+                            @if (Auth::check() && (Auth::user()->admin))
+                                <form style="margin-bottom:0px;" method="POST" action="{{ action('VoucherController@destroy', $voucher->id ) }}">
+                                    @csrf
+                                    @method("DELETE")
+                                    <input type="submit" class="btn btn-danger" href="{{ route('vouchers.destroy', $voucher->id) }}" value="Delete">
+                                </form>
+                                <a class="btn btn-warning" href="#">Edit</a>
+                            @else                    
+                                <button type="button" class="btn btn-primary">Redeem</button>
+                            @endif
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @endif
 </div>
 
-<h2 style="margin-top:20px;">Local Service Discounts</h2>
-<div class="row responsive-center">
-@for ($i = 0; $i < 7; $i++)
-    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-        <div class="card" style=";margin-right:15px;padding:5px;">
-            <a href="#exampleModal" role="button" data-toggle="modal">
-                <img class="card-img-top" class="img-fluid" src="../storage/app/{{ $vouchers[0]->image_location }}" alt='{{$vouchers[0]->name}}'>
-            </a>
-            <div class="card-body text-center">
-                <button type="button" class="btn greencode" data-toggle="modal" data-target="#exampleModal">
-                  Open Voucher
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">test</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <img src="../storage/app/{{ $vouchers[0]->image_location }}" class="img-fluid" alt='{{$vouchers[0]->name}}'>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Redeem</button>
-                </div>
-            </div>
-        </div>
-    </div>
-@endfor
-</div>
 <?php 
 
 /*

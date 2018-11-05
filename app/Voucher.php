@@ -20,4 +20,8 @@ class Voucher extends Model
     public function redeems(){
         return $this->hasMany('App\Redeem');   
     }
+    
+    public function tags(){
+        return $this->hasMany('App\Tag');
+    }
 }

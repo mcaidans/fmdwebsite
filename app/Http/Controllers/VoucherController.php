@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 use App\Voucher;
+use File;
 
 class VoucherController extends Controller
 {
@@ -15,6 +17,13 @@ class VoucherController extends Controller
     public function index()
     {
         $vouchers = Voucher::all();
+        /*
+        ADD FIELD WITH NO SPACES FOR ID
+        foreach($vouchers as $voucher)
+        {
+            $voucher->setAttribute('nospacename', str_replace(' ', '', $voucher->name));
+        }*/
+
         return view('vouchers.index')->with('vouchers', $vouchers);
     }
 
@@ -60,7 +69,14 @@ class VoucherController extends Controller
      */
     public function show($id)
     {
-        //
+        if(\Auth::check() && \Auth::user()->admin){
+            $voucher = Voucher::find($id);
+            return view('vouchers.show')->with('voucher', $voucher);
+        }
+        else
+        {
+            return redirect()->route('vouchers.index');
+        }
     }
 
     /**
@@ -71,7 +87,15 @@ class VoucherController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        if(\Auth::check() && \Auth::user()->admin){
+            $voucher = Voucher::find($id);
+            return view('vouchers.edit')->with('voucher', $voucher);
+        }
+        else
+        {
+            return redirect()->route('vouchers.index');
+        }
     }
 
     /**
@@ -94,6 +118,34 @@ class VoucherController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $voucher = Voucher::find($id);
+        //dd(app_path()."/storage/app/".$voucher->image_location);
+        File::delete(public_path()."/".$voucher->image_location);
+        $voucher->delete();
+        return redirect()->route('vouchers.index');
+        //"/home/ubuntu/workspace/public/voucherimages/rtNHnVXrVMazF1Pkypo6u8IgEZNaUPfZS3yAMcyS.png"
+        ///storage/app/voucherimages/0WHiZoHI6cnQatbV5H33kLRvOpNkvhP91foxXnZM.png
+
+    }
+    
+    public function importpage(){
+        return view('vouchers.importpage');
+    }
+    
+    public function import(Request $request)
+    {
+        $input = $request->all();
+        $images = array();
+        if($files=$request->file('images')){
+            foreach($files as $file){
+                
+                $voucher = new Voucher;
+                $voucher->name=$file->getClientOriginalName();
+                $voucher->image_location = $file->store('voucherimages');
+                $voucher->description = '';
+                $voucher->save();
+            }
+        }
+        return redirect()->route('vouchers.index');
     }
 }
