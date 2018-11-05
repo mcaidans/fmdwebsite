@@ -10,18 +10,18 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-        <title>Free Meal Deals</title>
+        <title>Gold Coast Discounts</title>
     </head>
     <body>
         <div class="container" style="max-width:100%">
         
             <nav class="navbar navbar-expand-lg greencode">
                 <a class="navbar-brand greencode" href="{{ route('vouchers.index') }}">Gold Coast Discounts</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navT" aria-controls="navT" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button> 
                 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="navT">
                     <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href={{ route('vouchers.index') }}>Vouchers <span class="sr-only">(current)</span></a>
@@ -30,8 +30,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href={{ route('contact') }}>Contact Us</a>
                     </li>
-                    </ul>
                     
+                    @if (Auth::check() && (Auth::user()->admin))
+                        <li class="nav-item">
+                            <a class="nav-link" href={{ route('vouchers.create') }}>Add New Voucher</a>
+                        </li>                      
+                    @endif
+                    </ul>
+                
                     <!-- <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

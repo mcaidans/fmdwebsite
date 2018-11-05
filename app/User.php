@@ -24,10 +24,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'admin',
     ];
     
     public function redeems(){
         return $this->hasMany('App\Redeem');   
+    }
+    
+    public function isAdmin(){
+        if($this->admin == '1')
+            return true;
+        else
+            return false; 
     }
 }
