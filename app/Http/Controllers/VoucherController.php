@@ -17,6 +17,7 @@ class VoucherController extends Controller
     public function index()
     {
         $vouchers = Voucher::all();
+        $t = Voucher::find(47);
         /*
         ADD FIELD WITH NO SPACES FOR ID
         foreach($vouchers as $voucher)
@@ -24,7 +25,7 @@ class VoucherController extends Controller
             $voucher->setAttribute('nospacename', str_replace(' ', '', $voucher->name));
         }*/
 
-        return view('vouchers.index')->with('vouchers', $vouchers);
+        return view('vouchers.index')->with('vouchers', $vouchers)->with('t', $t);
     }
 
     /**
