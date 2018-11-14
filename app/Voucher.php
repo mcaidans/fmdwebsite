@@ -19,7 +19,7 @@ class Voucher extends Model
     ];
     
     public function redeems(){
-        return $this->hasMany('App\Redeem')->where('created_at', '<', Carbon::now());//->subDay());
+        return $this->hasMany('App\Redeem')->where('created_at', '>=', Carbon::now()->subDay());
     }
     
     public function tags(){
