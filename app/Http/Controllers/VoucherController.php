@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Voucher;
 use App\Redeem;
+use App\Voucher;
+
 use File;
 use Illuminate\Support\Facades\DB;
 
@@ -18,8 +19,15 @@ class VoucherController extends Controller
      */
     public function index()
     {
-        $vouchers = DB::table('vouchers')->orderBy('id')->get();
+       // $vouchers = DB::table('vouchers')->orderBy('id')->get();
+       $vouchers = Voucher::all()->sortBy('id');
         $t = Voucher::find(47);
+        foreach($vouchers as $voucher){
+            if (!$voucher->redeems()->get()->isEmpty())
+                $voucher->isRedeemed = true;
+                //dd($voucher);
+                //dd($vouchers, $voucher->redeems()->get(), $count);
+        }
         /*
         ADD FIELD WITH NO SPACES FOR ID
         foreach($vouchers as $voucher)
@@ -153,15 +161,13 @@ class VoucherController extends Controller
     }
     
     public function redeem(Request $request){
-       // dd($request->all());
+       //dd($request->all());
 
-       $request->validate(Redeem::$rules);
-        dd($redeem = new Redeem);
+        $request->validate(Redeem::$rules);
+        $redeem = new Redeem;
         $redeem->voucher_id = $request['voucher_id'];
         $redeem->user_id = $request['user_id'];
-        dd($redeem);
-        dd($redeem->save);
-        dd('test');
+        $redeem->save();
         return redirect()->route('vouchers.index');
     }
 }

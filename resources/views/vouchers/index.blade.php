@@ -27,7 +27,11 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <img src="../storage/app/{{ $voucher->image_location }}" class="img-fluid" alt='{{$voucher->name}}'>
+                            <img src="../storage/app/{{ $voucher->image_location }}" class="img-fluid" alt='{{$voucher->name}}'
+                            @if ($voucher->isRedeemed)
+                                style="opacity:0.4;"
+                            @endif
+                            >
                         </div>
                         <div class="modal-footer">
                             @if (Auth::check() && (Auth::user()->admin))
@@ -38,11 +42,15 @@
                                 </form>
                                 <a class="btn btn-warning" href="{{ route('vouchers.edit', $voucher->id) }}">Edit</a>
                             @elseif(Auth::check())
-                                <form style="margin-bottom:0px;" method="POST" action="{{ action('VoucherController@redeem') }}">
+                                <form style="margin-bottom:0px;" method="POST" action="{{ action('VoucherController@redeem') }}" enctype="multipart/form-data">
                                 @csrf
                                     <input name="voucher_id" type="hidden" value="{{$voucher->id}}">
                                     <input name="user_id" type="hidden" value="{{ Auth::user()->id }}">
-                                    <input type="submit" class="btn greencode" href="#" value="Redeem">
+                                    
+                                    <input type="submit" class="btn greencode" value="Redeem"
+                                    @if ($voucher->isRedeemed)
+                                        disabled
+                                    @endif>
                                 </form>
                             @else
                                 <p>Must be logged in to redeem</p>

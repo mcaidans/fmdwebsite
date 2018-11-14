@@ -48,8 +48,8 @@
                         </div>
                         
                         <div class="form-group row">
-                        <lavel for="receive_email">Receive Email?</label>
-                            <div class="col-md-6">
+                        <label for="receive_email" class="col-md-4 col-form-label text-md-right">Receive Email?</label>
+                            <div class="col-md-2">
                                 <input id="receive_email" type="checkbox" class="form-control" name="receive_email" value="true">
                             </div>
                         </div>

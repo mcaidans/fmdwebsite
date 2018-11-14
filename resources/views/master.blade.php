@@ -45,13 +45,12 @@
                     @if (\Request::is('register'))  
                     @else
                     @if (Auth::check())
-                        <a href={{ route('logout') }}> Logout</a>
+                        <a style="color:white;text-decoration:none;" href={{ route('logout') }}> Logout</a>
                     @else
                         <!-- DROPDOWN START -->
-                        <div class="dropdown {{$errors ? 'show' : '' }}">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded={{ $errors ? 'true' : 'false' }}><b>Login</b> <span class="caret"></span></a>
-                        
-                        <div class="dropdown-menu dropdown-menu-right login-dp {{ $errors ? 'show' : '' }}">
+                        <div class="dropdown {{ !$errors->isEmpty() ? 'show' : '' }}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded={{ !$errors->isEmpty() ? 'true' : 'false' }}><b>Login</b> <span class="caret"></span></a>
+                        <div class="dropdown-menu dropdown-menu-right login-dp {{ !$errors->isEmpty() ? 'show' : '' }}">
         			
                             <div class="row">
                                 <div class="col-md-12">
@@ -76,9 +75,9 @@
                                                 <strong>{{ $errors->first('password') }}</strong>
                                             </span>
                                         @endif
-                                        <div class="help-block text-right">
+                                        <!--<div class="help-block text-right">
                                             <a href="{{ route('password.request') }}">Forgot your password?</a>
-                                        </div>
+                                        </div>-->
                                     </div>
             
                                     <div class="form-group">
