@@ -36,9 +36,16 @@
                                     @method("DELETE")
                                     <input type="submit" class="btn btn-danger" href="{{ route('vouchers.destroy', $voucher->id) }}" value="Delete">
                                 </form>
-                                <a class="btn btn-warning" href="#">Edit</a>
-                            @else                    
-                                <button type="button" class="btn btn-primary">Redeem</button>
+                                <a class="btn btn-warning" href="{{ route('vouchers.edit', $voucher->id) }}">Edit</a>
+                            @elseif(Auth::check())
+                                <form style="margin-bottom:0px;" method="POST" action="{{ action('VoucherController@redeem') }}">
+                                @csrf
+                                    <input name="voucher_id" type="hidden" value="{{$voucher->id}}">
+                                    <input name="user_id" type="hidden" value="{{ Auth::user()->id }}">
+                                    <input type="submit" class="btn greencode" href="#" value="Redeem">
+                                </form>
+                            @else
+                                <p>Must be logged in to redeem</p>
                             @endif
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>

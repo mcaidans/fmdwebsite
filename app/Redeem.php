@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Redeem extends Model
 {
     protected $table = 'redeems';
+    protected $connection = 'mysql';
     
     public static $rules = array(
         'user_id' => 'required',

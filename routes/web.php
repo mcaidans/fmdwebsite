@@ -27,3 +27,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
 Route::post('import', '\App\Http\Controllers\VoucherController@import')->name('import');
+
+Route::post('vouchers/redeem', '\App\Http\Controllers\VoucherController@redeem')->name('vouchers.redeem');
