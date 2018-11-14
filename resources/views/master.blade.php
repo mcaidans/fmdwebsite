@@ -164,17 +164,6 @@
                         </a>
                     </div>
                     
-                    <div class="col-md-4 footer-cols">
-                    <h4>App coming soon!</h4>
-                    <!-- APP BADGES
-                        <h4>Download Our Free App</h4>
-                        <a class="icons" href='#'>
-                            <img class="app-badge" alt='Get it on Google Play' src="/storage/app/google-no-padding.png"></img>
-                        </a>
-                        <a class="icons" href='#'>
-                            <img class="app-badge" alt="Get it on the App Store" src="/storage/app/app-store-badge.png"></img>
-                        </a> -->
-                    </div>
                 </div>
             </div>
                     
