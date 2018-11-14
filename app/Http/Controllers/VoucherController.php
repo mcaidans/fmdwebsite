@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Voucher;
+use App\Redeem;
 use File;
 
 class VoucherController extends Controller
@@ -55,7 +56,7 @@ class VoucherController extends Controller
             $voucher->description = '';
             $voucher->save();
 
-			
+			dd($voucher);
 			
 			return redirect()->route('vouchers.create');
 
@@ -147,6 +148,19 @@ class VoucherController extends Controller
                 $voucher->save();
             }
         }
+        return redirect()->route('vouchers.index');
+    }
+    
+    public function redeem(Request $request){
+       // dd($request->all());
+
+       $request->validate(Redeem::$rules);
+        dd($redeem = new Redeem);
+        $redeem->voucher_id = $request['voucher_id'];
+        $redeem->user_id = $request['user_id'];
+        dd($redeem);
+        dd($redeem->save);
+        dd('test');
         return redirect()->route('vouchers.index');
     }
 }
