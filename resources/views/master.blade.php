@@ -168,7 +168,7 @@
             </div>
                     
             <div class="footer-copyright text-center py-3">
-                © 2018 Copyright - Free Meal Deals - All Rights Reserved.
+                © 2018 Copyright - GoldCoastDiscounts.com.au - All Rights Reserved.
             </div>
         </footer>
         
