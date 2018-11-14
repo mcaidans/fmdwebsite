@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Voucher;
 use File;
+use Illuminate\Support\Facades\DB;
 
 class VoucherController extends Controller
 {
@@ -16,7 +17,7 @@ class VoucherController extends Controller
      */
     public function index()
     {
-        $vouchers = Voucher::all();
+        $vouchers = DB::table('vouchers')->orderBy('id')->get();
         $t = Voucher::find(47);
         /*
         ADD FIELD WITH NO SPACES FOR ID
