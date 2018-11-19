@@ -12,7 +12,7 @@
     <div class="col-xs-12 col-sm-10 col-lg-6">
         <h2>Contact Us</h2>
         <div class="call-box center-text">
-            <h3>Looking to join our customer network? Give us a call on <span style="color:blue;">0468 321 694</span> </h3>
+            <h3>Looking to join our customer network? Give us a call on <span style="color:blue;">0425 638 428</span> </h3>
         </div>
     <br>
     <h3 style="text-align: center;">Or</h3><br>
