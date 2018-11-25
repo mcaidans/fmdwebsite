@@ -20,14 +20,18 @@ class VoucherController extends Controller
     public function index()
     {
        // $vouchers = DB::table('vouchers')->orderBy('id')->get();
-       $vouchers = Voucher::all()->sortBy('id');
-        $t = Voucher::find(47);
+       if(\Auth::check()){
+           $user = \Auth::user();
+       }else{
+           $user = false;
+       }
+        $vouchers = Voucher::all()->sortBy('id');
         foreach($vouchers as $voucher){
-            if (!$voucher->redeems()->get()->isEmpty())
+            if ($user && (!$user->redeems()->where('voucher_id', $voucher->id)->get()->isEmpty()))
                 $voucher->isRedeemed = true;
-                //dd($voucher);
-                //dd($vouchers, $voucher->redeems()->get(), $count);
         }
+        
+        
         /*
         ADD FIELD WITH NO SPACES FOR ID
         foreach($vouchers as $voucher)
@@ -35,7 +39,7 @@ class VoucherController extends Controller
             $voucher->setAttribute('nospacename', str_replace(' ', '', $voucher->name));
         }*/
 
-        return view('vouchers.index')->with('vouchers', $vouchers)->with('t', $t);
+        return view('vouchers.index')->with('vouchers', $vouchers);
     }
 
     /**

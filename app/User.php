@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    
 
     /**
      * The attributes that are mass assignable.
@@ -27,8 +29,14 @@ class User extends Authenticatable
         'password', 'remember_token', 'admin',
     ];
     
-    public function redeems(){
-        return $this->hasMany('App\Redeem');   
+   public function redeems(){
+   
+        return $this->hasMany('App\Redeem', 'user_id');
+
+        /*->where([
+            //['created_at', '>=', Carbon::now()->subHours(12)],
+            ['user_id', '==', $this->id]
+            ]));*/
     }
     
     public function isAdmin(){
