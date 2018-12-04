@@ -48,6 +48,9 @@ $app = require_once __DIR__.'/../../applications/fmdwebsite/bootstrap/app.php';
 | and wonderful application we have prepared for them.
 |
 */
+$app->bind('path.public', function() {
+    return __DIR__;
+});
 
 //dd(phpinfo());
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
