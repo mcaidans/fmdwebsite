@@ -21,7 +21,7 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-require __DIR__.'/../../applications/fmdwebsite/vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php'; // '/../../applications/fmdwebsite/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +35,7 @@ require __DIR__.'/../../applications/fmdwebsite/vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../../applications/fmdwebsite/bootstrap/app.php';
+$app = require_once __DIR__.'/../bootstrap/app.php'; // '/../../applications/fmdwebsite/bootstrap/app.php';
 
 /*
 |--------------------------------------------------------------------------

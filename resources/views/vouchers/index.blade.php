@@ -59,7 +59,20 @@
                 data: {'voucher_id' : voucher_id, 'user_id' : user_id},
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 success: function(response){
-                    console.log(response);
+                    //console.log(response);
+                    
+                    var date = new Date();
+                    var day = date.getDate();
+                    var month = date.getMonth() + 1;
+                    var year = date.getFullYear();
+                    var minute = date.getMinutes();
+                    if(minute < 10)
+                        minute = "0" + minute;
+                    var hour = date.getHours();
+                    if(hour < 10)
+                        hour = "0" + hour;
+
+                    console.log("Voucher Redeemed at " + hour + ":" + minute + " on " + day + "/" + month + "/" + year);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log(JSON.stringify(jqXHR));
