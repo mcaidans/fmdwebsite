@@ -170,15 +170,14 @@ class VoucherController extends Controller
     }
     
     public function redeem(Request $request){
-        
-        $request->validate(Redeem::$rules);
+        //return response()->json(['data' => $request]);
+        //$request->validate(Redeem::$rules);
         $redeem = new Redeem;
         $redeem->voucher_id = $request['voucher_id'];
         $redeem->user_id = $request['user_id'];
         $redeem->save();
         
-        return response()->json(['data' => $request]);
-        //dd('test');
+        //return response()->json(['data' => $request]);
         //return redirect()->route('vouchers.index');
     }
 }
