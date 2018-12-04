@@ -8,11 +8,11 @@ use App\Redeem;
 use App\Voucher;
 
 use File;
-
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Storage;
-
+=======
 use Illuminate\Support\Facades\DB;
-
+>>>>>>> prod
 
 class VoucherController extends Controller
 {
@@ -23,6 +23,17 @@ class VoucherController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
+        //dd(public_path());
+        //dd(Storage::disk('public')->getDriver()->getAdapter()->getPathPrefix());
+        //dd(Storage::disk('public'));
+        
+        //dd(public_path());
+        $vouchers = Voucher::all();
+        $t = Voucher::find(47);
+        //dd(public_path());
+=======
+       // $vouchers = DB::table('vouchers')->orderBy('id')->get();
        if(\Auth::check()){
            $user = \Auth::user();
        }else{
@@ -34,6 +45,8 @@ class VoucherController extends Controller
                 $voucher->isRedeemed = true;
         }
         
+        
+>>>>>>> prod
         /*
         ADD FIELD WITH NO SPACES FOR ID
         foreach($vouchers as $voucher)
@@ -178,14 +191,23 @@ class VoucherController extends Controller
     }
     
     public function redeem(Request $request){
+<<<<<<< HEAD
+        //return response()->json(['data' => $request]);
+=======
+       //dd($request->all());
 
+>>>>>>> prod
         $request->validate(Redeem::$rules);
         $redeem = new Redeem;
         $redeem->voucher_id = $request['voucher_id'];
         $redeem->user_id = $request['user_id'];
-        $redeem->save();        
+        $redeem->save();
+<<<<<<< HEAD
+        
         return response()->json(['data' => 'reddemed']);
         //return redirect()->route('vouchers.index');
-
+=======
+        return redirect()->route('vouchers.index');
+>>>>>>> prod
     }
 }

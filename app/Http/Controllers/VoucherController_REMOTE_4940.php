@@ -8,11 +8,7 @@ use App\Redeem;
 use App\Voucher;
 
 use File;
-
-use Illuminate\Support\Facades\Storage;
-
 use Illuminate\Support\Facades\DB;
-
 
 class VoucherController extends Controller
 {
@@ -23,6 +19,7 @@ class VoucherController extends Controller
      */
     public function index()
     {
+       // $vouchers = DB::table('vouchers')->orderBy('id')->get();
        if(\Auth::check()){
            $user = \Auth::user();
        }else{
@@ -33,6 +30,7 @@ class VoucherController extends Controller
             if ($user && (!$user->redeems()->where('voucher_id', $voucher->id)->get()->isEmpty()))
                 $voucher->isRedeemed = true;
         }
+        
         
         /*
         ADD FIELD WITH NO SPACES FOR ID
@@ -63,26 +61,15 @@ class VoucherController extends Controller
      */
     public function store(Request $request)
     {
-
-        $filename =  $request->file('image')->path();
-        
-
 		    $validated = $request->validate(Voucher::$rules);
-		    $filename = $request->file('image')->store('voucherimages', 'public');
-            $oldFilePath = storage_path().'/app/public/' . $filename;
-            $newFilePath = public_path() . '/storage/' . $filename;
-            //dd($oldFilePath);
-            $move = File::move($oldFilePath, $newFilePath);//->store('voucherimages', 'public'));
-            //dd($move);
-            
+
 			$voucher = new Voucher;
             $voucher->name = $validated['name'];
-            //Storage::disk('public')->put('test', $request->file('image'));
-            $voucher->image_location = $filename;
+            $voucher->image_location = $request->file('image')->store('voucherimages');
             $voucher->description = '';
             $voucher->save();
-           //dd(public_path().'/storage');
-			//dd($voucher);
+
+			dd($voucher);
 			
 			return redirect()->route('vouchers.create');
 
@@ -178,14 +165,13 @@ class VoucherController extends Controller
     }
     
     public function redeem(Request $request){
+       //dd($request->all());
 
         $request->validate(Redeem::$rules);
         $redeem = new Redeem;
         $redeem->voucher_id = $request['voucher_id'];
         $redeem->user_id = $request['user_id'];
-        $redeem->save();        
-        return response()->json(['data' => 'reddemed']);
-        //return redirect()->route('vouchers.index');
-
+        $redeem->save();
+        return redirect()->route('vouchers.index');
     }
 }

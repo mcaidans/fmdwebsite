@@ -4,15 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Redeem;
 use App\Voucher;
-
+use App\Redeem;
 use File;
-
 use Illuminate\Support\Facades\Storage;
-
-use Illuminate\Support\Facades\DB;
-
 
 class VoucherController extends Controller
 {
@@ -23,17 +18,14 @@ class VoucherController extends Controller
      */
     public function index()
     {
-       if(\Auth::check()){
-           $user = \Auth::user();
-       }else{
-           $user = false;
-       }
-        $vouchers = Voucher::all()->sortBy('id');
-        foreach($vouchers as $voucher){
-            if ($user && (!$user->redeems()->where('voucher_id', $voucher->id)->get()->isEmpty()))
-                $voucher->isRedeemed = true;
-        }
+        //dd(public_path());
+        //dd(Storage::disk('public')->getDriver()->getAdapter()->getPathPrefix());
+        //dd(Storage::disk('public'));
         
+        //dd(public_path());
+        $vouchers = Voucher::all();
+        $t = Voucher::find(47);
+        //dd(public_path());
         /*
         ADD FIELD WITH NO SPACES FOR ID
         foreach($vouchers as $voucher)
@@ -41,7 +33,7 @@ class VoucherController extends Controller
             $voucher->setAttribute('nospacename', str_replace(' ', '', $voucher->name));
         }*/
 
-        return view('vouchers.index')->with('vouchers', $vouchers);
+        return view('vouchers.index')->with('vouchers', $vouchers)->with('t', $t);
     }
 
     /**
@@ -178,14 +170,14 @@ class VoucherController extends Controller
     }
     
     public function redeem(Request $request){
-
+        //return response()->json(['data' => $request]);
         $request->validate(Redeem::$rules);
         $redeem = new Redeem;
         $redeem->voucher_id = $request['voucher_id'];
         $redeem->user_id = $request['user_id'];
-        $redeem->save();        
+        $redeem->save();
+        
         return response()->json(['data' => 'reddemed']);
         //return redirect()->route('vouchers.index');
-
     }
 }

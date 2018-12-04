@@ -46,13 +46,12 @@
                     @if (\Request::is('register'))  
                     @else
                     @if (Auth::check())
-                        <a href={{ route('logout') }}> Logout</a>
+                        <a style="color:white;text-decoration:none;" href={{ route('logout') }}> Logout</a>
                     @else
                         <!-- DROPDOWN START -->
-                        <div class="dropdown {{$errors ? 'show' : '' }}">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded={{ $errors ? 'true' : 'false' }}><b>Login</b> <span class="caret"></span></a>
-                        
-                        <div class="dropdown-menu dropdown-menu-right login-dp {{ $errors ? 'show' : '' }}">
+                        <div class="dropdown {{ !$errors->isEmpty() ? 'show' : '' }}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded={{ !$errors->isEmpty() ? 'true' : 'false' }}><b>Login</b> <span class="caret"></span></a>
+                        <div class="dropdown-menu dropdown-menu-right login-dp {{ !$errors->isEmpty() ? 'show' : '' }}">
         			
                             <div class="row">
                                 <div class="col-md-12">
@@ -77,9 +76,9 @@
                                                 <strong>{{ $errors->first('password') }}</strong>
                                             </span>
                                         @endif
-                                        <div class="help-block text-right">
+                                        <!--<div class="help-block text-right">
                                             <a href="{{ route('password.request') }}">Forgot your password?</a>
-                                        </div>
+                                        </div>-->
                                     </div>
             
                                     <div class="form-group">
@@ -166,22 +165,11 @@
                         </a>
                     </div>
                     
-                    <div class="col-md-4 footer-cols">
-                    <h4>App coming soon!</h4>
-                    <!-- APP BADGES
-                        <h4>Download Our Free App</h4>
-                        <a class="icons" href='#'>
-                            <img class="app-badge" alt='Get it on Google Play' src="/storage/app/google-no-padding.png"></img>
-                        </a>
-                        <a class="icons" href='#'>
-                            <img class="app-badge" alt="Get it on the App Store" src="/storage/app/app-store-badge.png"></img>
-                        </a> -->
-                    </div>
                 </div>
             </div>
                     
             <div class="footer-copyright text-center py-3">
-                © 2018 Copyright - Free Meal Deals - All Rights Reserved.
+                © 2018 Copyright - GoldCoastDiscounts.com.au - All Rights Reserved.
             </div>
         </footer>
         

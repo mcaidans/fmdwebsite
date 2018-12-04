@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Voucher extends Model
 {
@@ -18,10 +19,13 @@ class Voucher extends Model
     ];
     
     public function redeems(){
-        return $this->hasMany('App\Redeem');   
+        return $this->hasMany('App\Redeem')->where('created_at', '>=', Carbon::now()->subDay());
     }
     
     public function tags(){
         return $this->hasMany('App\Tag');
     }
+    
+        
+
 }

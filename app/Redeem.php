@@ -19,10 +19,11 @@ class Redeem extends Model
     ];
     
     public function voucher(){
-        return $this->hasOne('App\Voucher');
+        return $this->belongsTo('App\Voucher');
     }
+
     
     public function user(){
-        return $this->hasOne('App\User');   
+        return $this->belongsTo('App\User');   
     }
 }

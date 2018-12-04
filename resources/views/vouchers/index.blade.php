@@ -5,6 +5,7 @@
     <div class="row responsive-center">
         @if(!empty($vouchers))
             
+<<<<<<< HEAD
             @foreach($vouchers as $voucher) 
                 <div class="col-sm-6 col-lg-4 col-xl-3">
                     <div class="card" style=";margin-right:15px;padding:5px;">
@@ -13,6 +14,47 @@
                         </a>
                         <div class="card-body text-center">
                             <button type="button" class="btn greencode" data-toggle="modal" data-target="#voucher{{$voucher->id}}">Open Voucher</button>
+=======
+            <div class="modal fade" id="voucher{{$voucher->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <!-- <h5 class="modal-title" id="exampleModalLabel">{{ $voucher->name }}</h5> -->
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <img src="../storage/app/{{ $voucher->image_location }}" class="img-fluid" alt='{{$voucher->name}}'
+                            @if ($voucher->isRedeemed)
+                                style="opacity:0.4;"
+                            @endif
+                            >
+                        </div>
+                        <div class="modal-footer">
+                            @if (Auth::check() && (Auth::user()->admin))
+                                <form style="margin-bottom:0px;" method="POST" action="{{ action('VoucherController@destroy', $voucher->id ) }}">
+                                    @csrf
+                                    @method("DELETE")
+                                    <input type="submit" class="btn btn-danger" href="{{ route('vouchers.destroy', $voucher->id) }}" value="Delete">
+                                </form>
+                                <a class="btn btn-warning" href="{{ route('vouchers.edit', $voucher->id) }}">Edit</a>
+                            @elseif(Auth::check())
+                                <form style="margin-bottom:0px;" method="POST" action="{{ action('VoucherController@redeem') }}" enctype="multipart/form-data">
+                                @csrf
+                                    <input name="voucher_id" type="hidden" value="{{$voucher->id}}">
+                                    <input name="user_id" type="hidden" value="{{ Auth::user()->id }}">
+                                    
+                                    <input type="submit" class="btn greencode" value="Redeem"
+                                    @if ($voucher->isRedeemed)
+                                        disabled
+                                    @endif>
+                                </form>
+                            @else
+                                <p>Must be logged in to redeem</p>
+                            @endif
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+>>>>>>> prod
                         </div>
                     </div>
                 </div>
