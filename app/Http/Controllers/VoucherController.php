@@ -72,7 +72,6 @@ class VoucherController extends Controller
      */
     public function store(Request $request)
     {
-
         $filename =  $request->file('image')->path();
         
 
@@ -80,7 +79,7 @@ class VoucherController extends Controller
 		    $filename = $request->file('image')->store('voucherimages', 'public');
             $oldFilePath = storage_path().'/app/public/' . $filename;
             $newFilePath = public_path() . '/storage/' . $filename;
-
+		
             $move = File::move($oldFilePath, $newFilePath);//->store('voucherimages', 'public'));
 
             
