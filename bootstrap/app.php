@@ -10,18 +10,12 @@
 | the IoC container for the system binding all of the various parts.
 |
 */
- 
+
 $app = new Illuminate\Foundation\Application(
     realpath(__DIR__.'/../')
 );
-/*
--- until here */
 
-/* -- add this new code -- 
-$app = new App\GoPublic(
- realpath(__DIR__.'/../')
-);
-*/
+
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces

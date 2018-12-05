@@ -73,15 +73,15 @@ class VoucherController extends Controller
     public function store(Request $request)
     {
 
-            $filename =  $request->file('image')->path();
+            //$filename =  $request->file('image')->path();
         
-
 		    $validated = $request->validate(Voucher::$rules);
+		    //$filename = $request->file('image')->store('voucherimages');
 		    $filename = $request->file('image')->store('voucherimages', 'public');
             $oldFilePath = storage_path().'/app/public/' . $filename;
             $newFilePath = public_path() . '/storage/' . $filename;
-
-            $move = File::move($oldFilePath, $newFilePath);//->store('voucherimages', 'public'));
+            //dd($filename1, $filename, $oldFilePath, $newFilePath);
+            //$move = File::move($oldFilePath, $newFilePath);//->store('voucherimages', 'public'));
 
             
 			$voucher = new Voucher;
