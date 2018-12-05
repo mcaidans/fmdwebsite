@@ -9,6 +9,6 @@ class GoPublic extends \Illuminate\Foundation\Application
  */
  public function publicPath()
  {
- return $this->basePath.DIRECTORY_SEPARATOR.'../../public_html/your_app_name';
+ return $this->basePath.DIRECTORY_SEPARATOR.'../public';
  }
 }
