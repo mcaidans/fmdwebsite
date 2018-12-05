@@ -3,10 +3,41 @@
     color:white;
 }
 
+.check-circle{
+    color: #07AD4D;
+    margin-bottom: 5px;
+}
+
 .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
 
+.redeem-overlay{
+    position: absolute;
+    width: 80%;
+    top: 30%;
+    left:10%;
+    background-color: white;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+    border: 4px solid #07AD4D;
+}
+
+.redeem-text{
+    color: #07AD4D;
+    font-weight:650;
+    margin-bottom:5px;
+}
+
+
+redeem-overlay-current{
+    
+}
+redeem-overlay-previous{
+    
+}
 a.nav-link{
     color:white;
 }
@@ -72,6 +103,9 @@ ul.center-text{
 }
 
 @media (min-width: 576px){
+        .redeem-text{
+        font-size:28px;   
+    }
     .navbar-expand-lg {
         -ms-flex-flow: row nowrap;
         flex-flow: row nowrap;
@@ -111,6 +145,12 @@ ul.center-text{
 }
 
 @media (max-width:576px){
+    .redeem-text{
+        font-size: 5vw;
+    }
+    .redeem-overlay{
+        top:10%;   
+    }
     .responsive-center{
         justify-content: center!important;
     }
@@ -135,7 +175,7 @@ ul.center-text{
     padding:14px;
 }
 .login-dp .social-buttons{
-    margin:12px 0    
+    margin:12px 0;    
 }
 .login-dp .social-buttons a{
     width: 49%;

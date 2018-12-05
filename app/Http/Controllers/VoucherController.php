@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Redeem;
 use App\Voucher;
+use Carbon\Carbon;
 
 use File;
 
@@ -23,15 +24,24 @@ class VoucherController extends Controller
      */
     public function index()
     {
-       if(\Auth::check()){
+        if(\Auth::check()){
            $user = \Auth::user();
-       }else{
+        }else{
            $user = false;
-       }
+        }
         $vouchers = Voucher::all()->sortBy('id');
         foreach($vouchers as $voucher){
-            if ($user && (!$user->redeems()->where('voucher_id', $voucher->id)->get()->isEmpty()))
-                $voucher->isRedeemed = true;
+            if($user){
+                $redemption = $user->redeems()->where([
+                ['created_at', '>=', Carbon::now()->subHours($voucher->timeout)],
+                ['voucher_id', '=', $voucher->id]
+                ])->first();
+                if ($redemption){
+                    $voucher->isRedeemed = true;
+                    $voucher->redeemedAt = $redemption->created_at->toDayDateTimeString();
+                    $voucher->redeemAvailable = $redemption->created_at->addHours($voucher->timeout)->toDayDateTimeString();  
+                }
+            }
         }
         
         /*
@@ -40,7 +50,6 @@ class VoucherController extends Controller
         {
             $voucher->setAttribute('nospacename', str_replace(' ', '', $voucher->name));
         }*/
-
         return view('vouchers.index')->with('vouchers', $vouchers);
     }
 
@@ -71,18 +80,16 @@ class VoucherController extends Controller
 		    $filename = $request->file('image')->store('voucherimages', 'public');
             $oldFilePath = storage_path().'/app/public/' . $filename;
             $newFilePath = public_path() . '/storage/' . $filename;
-            //dd($oldFilePath);
+
             $move = File::move($oldFilePath, $newFilePath);//->store('voucherimages', 'public'));
-            //dd($move);
+
             
 			$voucher = new Voucher;
             $voucher->name = $validated['name'];
-            //Storage::disk('public')->put('test', $request->file('image'));
+
             $voucher->image_location = $filename;
             $voucher->description = '';
             $voucher->save();
-           //dd(public_path().'/storage');
-			//dd($voucher);
 			
 			return redirect()->route('vouchers.create');
 
@@ -184,7 +191,11 @@ class VoucherController extends Controller
         $redeem->voucher_id = $request['voucher_id'];
         $redeem->user_id = $request['user_id'];
         $redeem->save();        
-        return response()->json(['data' => 'reddemed']);
+        $dateRedeemed = $redeem->created_at->toDayDateTimeString(); //Get Date Redeemed in readable format
+        $dateAvailable = $redeem->created_at->addHours($redeem->voucher()->first()->timeout)->toDayDateTimeString(); //Get Date available for next redeem in readable format
+        
+        return response()->json(['dateRedeemed' => $dateRedeemed, 'dateAvailable' => $dateAvailable]);
+        
         //return redirect()->route('vouchers.index');
 
     }

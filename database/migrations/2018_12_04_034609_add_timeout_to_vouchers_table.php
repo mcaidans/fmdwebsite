@@ -14,7 +14,7 @@ class AddTimeoutToVouchersTable extends Migration
     public function up()
     {
         Schema::table('vouchers', function (Blueprint $table) {
-            $table->integer('timeout')->default(24);
+            $table->integer('timeout')->default(15);
         });
     }
 

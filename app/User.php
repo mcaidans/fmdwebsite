@@ -32,7 +32,7 @@ class User extends Authenticatable
    public function redeems(){
    
         return $this->hasMany('App\Redeem', 'user_id');
-
+        
         /*->where([
             //['created_at', '>=', Carbon::now()->subHours(12)],
             ['user_id', '==', $this->id]
