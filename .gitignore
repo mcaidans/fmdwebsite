@@ -16,4 +16,4 @@ public/*
 
 composer.lock
 public/storage/voucherimages
-/app/GoPublic.php
+app/GoPublic.php
