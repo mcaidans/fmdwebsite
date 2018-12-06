@@ -24,6 +24,7 @@ class VoucherController extends Controller
      */
     public function index()
     {
+       
         if(\Auth::check()){
            $user = \Auth::user();
         }else{
@@ -198,5 +199,33 @@ class VoucherController extends Controller
         
         //return redirect()->route('vouchers.index');
 
+    }
+    
+     public function updateOrder(){
+        return view('vouchers.importcsv');
+    }
+    public function importCSV(){
+        
+    }
+    function csvToArray($filename = '', $delimiter = ',')
+    {
+        if (!file_exists($filename) || !is_readable($filename))
+            return false;
+    
+        $header = null;
+        $data = array();
+        if (($handle = fopen($filename, 'r')) !== false)
+        {
+            while (($row = fgetcsv($handle, 1000, $delimiter)) !== false)
+            {
+                if (!$header)
+                    $header = $row;
+                else
+                    $data[] = array_combine($header, $row);
+            }
+            fclose($handle);
+        }
+    
+        return $data;
     }
 }

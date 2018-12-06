@@ -52,6 +52,8 @@ $app->bind('path.public', function() {
     return __DIR__;
 });
 
+
+
 //dd(phpinfo());
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
