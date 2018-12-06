@@ -156,13 +156,13 @@
                     <div class="col-md-3 footer-cols">
                         <h4>Follow Us</h4>
                         <a class="icons" href='https://www.facebook.com/GoldCoastDiscounts/'>
-                            <img class="app-badge" alt='Facebook' src="/storage/app/facebook_icon_circle.png"></img>
+                            <img class="app-badge" alt='Facebook' src="facebook_icon_circle.png"></img>
                         </a>
                         <a class="icons" href='https://twitter.com/DiscountsGold'>
-                            <img class="app-badge" alt='Twitter' src="/storage/app/twitter_icon_circle.png"></img>
+                            <img class="app-badge" alt='Twitter' src="twitter_icon_circle.png"></img>
                         </a>
                         <a class="icons" href='https://www.instagram.com/gold_coast_discounts/'>
-                            <img class="app-badge" alt='Instagram' src="/storage/app/instagram_icon_red.png"></img>
+                            <img class="app-badge" alt='Instagram' src="instagram_icon_red.png"></img>
                         </a>
                     </div>
                     

@@ -24,7 +24,7 @@ class VoucherController extends Controller
      */
     public function index()
     {
-       
+        if(\Auth::check()){
         if(\Auth::check()){
            $user = \Auth::user();
         }else{
@@ -61,7 +61,7 @@ class VoucherController extends Controller
      */
     public function create()
     {
-        
+     //dd(public_path(), storage_path());   
         return view('vouchers.create');
     }
 
@@ -73,17 +73,26 @@ class VoucherController extends Controller
      */
     public function store(Request $request)
     {
-
-            //$filename =  $request->file('image')->path();
+	//dd($request->file('image'));
+        $filename1 =  $request->file('image')->path();
+	
         
-		    $validated = $request->validate(Voucher::$rules);
-		    //$filename = $request->file('image')->store('voucherimages');
-		    $filename = $request->file('image')->store('voucherimages', 'public');
-            $oldFilePath = storage_path().'/app/public/' . $filename;
-            $newFilePath = public_path() . '/storage/' . $filename;
-            //dd($filename1, $filename, $oldFilePath, $newFilePath);
-            //$move = File::move($oldFilePath, $newFilePath);//->store('voucherimages', 'public'));
 
+		    $validated = $request->validate(Voucher::$rules);
+		    $filename = $request->file('image')->store('voucherimages', 'public');
+        
+
+		    $validated = $request->validate(Voucher::$rules);
+		    $validated = $request->validate(Voucher::$rules);
+		    $filename = $request->file('image')->store('voucherimages', 'public');
+		    
+            //$oldFilePath = storage_path().'/app/public/' . $filename;
+            $oldFilePath = base_path().'/public/storage/' . $filename;
+            $newFilePath = storage_path() . '/' . $filename;
+		//dd(public_path(), base_path(), storage_path(), app_path(), $oldFilePath, $newFilePath);
+            $move = File::move($oldFilePath, $newFilePath);//->store('voucherimages', 'public'));
+//dd($filename1, $filename, public_path(), storage_path());
+            
             
 			$voucher = new Voucher;
             $voucher->name = $validated['name'];
