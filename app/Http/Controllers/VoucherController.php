@@ -25,7 +25,6 @@ class VoucherController extends Controller
     public function index()
     {
         if(\Auth::check()){
-        if(\Auth::check()){
            $user = \Auth::user();
         }else{
            $user = false;
@@ -168,8 +167,6 @@ class VoucherController extends Controller
         File::delete(public_path()."/".$voucher->image_location);
         $voucher->delete();
         return redirect()->route('vouchers.index');
-        //"/home/ubuntu/workspace/public/voucherimages/rtNHnVXrVMazF1Pkypo6u8IgEZNaUPfZS3yAMcyS.png"
-        ///storage/app/voucherimages/0WHiZoHI6cnQatbV5H33kLRvOpNkvhP91foxXnZM.png
 
     }
     
