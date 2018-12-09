@@ -142,7 +142,7 @@
                         <h4>Information</h4>
                         <ul class="footer-link-list">
                             <li>
-                                <a class="footer-link" href="#" >Advertise with Us</a>
+                                <a class="footer-link" href="2019 FULL YEAR Advertising Prices.pdf" >Advertise with Us</a>
                             </li>
                             <li>
                                 <a class="footer-link" href={{ route('policy') }}>Privacy Policy</a>
