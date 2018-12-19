@@ -74,21 +74,14 @@ class VoucherController extends Controller
     {
 	//dd($request->file('image'));
         $filename1 =  $request->file('image')->path();
-	
-        
 
-		    $validated = $request->validate(Voucher::$rules);
-		    $filename = $request->file('image')->store('voucherimages', 'public');
-        
-		    $validated = $request->validate(Voucher::$rules);
-		    $filename = $request->file('image')->store('voucherimages', 'public');
+	    $validated = $request->validate(Voucher::$rules);
+	    $filename = $request->file('image')->store('voucherimages', 'public');
 		    
             //$oldFilePath = storage_path().'/app/public/' . $filename;
             $oldFilePath = base_path().'/public/storage/' . $filename;
             $newFilePath = storage_path() . '/' . $filename;
-		//dd(public_path(), base_path(), storage_path(), app_path(), $oldFilePath, $newFilePath);
-            $move = File::move($oldFilePath, $newFilePath);//->store('voucherimages', 'public'));
-//dd($filename1, $filename, public_path(), storage_path());
+            $move = File::move($oldFilePath, $newFilePath);
             
             
 			$voucher = new Voucher;
@@ -178,10 +171,13 @@ class VoucherController extends Controller
         $images = array();
         if($files=$request->file('images')){
             foreach($files as $file){
-                
+                $filename = $file->store('voucherimages', 'public');
+	            $oldFilePath = base_path().'/public/storage/' . $filename;
+	            $newFilePath = storage_path() . '/' . $filename;
+	            $move = File::move($oldFilePath, $newFilePath);
                 $voucher = new Voucher;
                 $voucher->name=$file->getClientOriginalName();
-                $voucher->image_location = $file->store('voucherimages');
+                $voucher->image_location = $filename;//->store('voucherimages');
                 $voucher->description = '';
                 $voucher->save();
             }
