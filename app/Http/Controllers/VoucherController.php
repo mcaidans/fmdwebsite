@@ -80,8 +80,6 @@ class VoucherController extends Controller
 		    $validated = $request->validate(Voucher::$rules);
 		    $filename = $request->file('image')->store('voucherimages', 'public');
         
-
-		    $validated = $request->validate(Voucher::$rules);
 		    $validated = $request->validate(Voucher::$rules);
 		    $filename = $request->file('image')->store('voucherimages', 'public');
 		    

@@ -16,6 +16,7 @@ Route::get('/', 'VoucherController@index');
 Route::resource('vouchers', 'VoucherController');
 
 Route::view('/contact', 'contact')->name('contact');
+Route::view('/about', 'about')->name('about');
 Route::view('/privacy-policy', 'privacy-policy')->name('policy');
 Route::view('/terms','terms')->name('terms');
 Route::get('/importpage', '\App\Http\Controllers\VoucherController@importPage')->name('importpage');

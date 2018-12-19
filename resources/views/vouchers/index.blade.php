@@ -57,12 +57,17 @@
                                     </form>
                                     <a class="btn btn-warning" href="{{ route('vouchers.edit', $voucher->id) }}">Edit</a>
                                 @elseif(Auth::check())
-                                    <button id="redeem_btn_{{$voucher->id}}" class="btn greencode" onclick="ajaxRedeem({{$voucher->id}}, {{ Auth::user()->id }})"
-                                    @if ($voucher->isRedeemed)
-                                        disabled
-                                    @endif>
-                                    Redeem</button>
-                                    
+                                    @if (empty($voucher->link))
+                                        <button id="redeem_btn_{{$voucher->id}}" class="btn greencode" onclick="ajaxRedeem({{$voucher->id}}, {{ Auth::user()->id }})"
+                                        @if ($voucher->isRedeemed)
+                                            disabled
+                                        @endif>
+                                        Redeem</button>
+                                    @else
+                                        <button class="btn greencode" onclick="location.href='http://{{$voucher->link}}'" type="button">
+                                             Visit Website
+                                        </button>
+                                    @endif
                                 @else
                                     <p>Must be logged in to redeem</p>
                                 @endif

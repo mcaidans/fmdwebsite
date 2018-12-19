@@ -32,6 +32,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href={{ route('contact') }}>Contact Us</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href={{ route('about') }}>About Us</a>
+                    </li>
                     
                     @if (Auth::check() && (Auth::user()->admin))
                         <li class="nav-item">
