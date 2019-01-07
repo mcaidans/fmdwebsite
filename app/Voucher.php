@@ -15,7 +15,7 @@ class Voucher extends Model
     );
     
     protected $fillable = [
-        'name', 'image_location'
+        'name', 'image_location', 'order'
     ];
     
     public function redeems(){

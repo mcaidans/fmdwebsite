@@ -29,7 +29,7 @@ class VoucherController extends Controller
         }else{
            $user = false;
         }
-        $vouchers = Voucher::all()->sortBy('id');
+        $vouchers = Voucher::all()->sortBy('order');
         foreach($vouchers as $voucher){
             if($user){
                 $redemption = $user->redeems()->where([
@@ -202,30 +202,26 @@ class VoucherController extends Controller
     }
     
      public function updateOrder(){
-        return view('vouchers.importcsv');
+         //dd('tt');
+        if(\Auth::check()){// && \Auth::user()->admin){
+            $vouchers = Voucher::all()->sortBy('order');
+            return view('vouchers.updateorder')->with('vouchers', $vouchers);;
+        }
+        dd('tt');
     }
-    public function importCSV(){
+
+    function saveOrder(Request $request){
+        //$orderArray = [];
+        $orderCount = 0;
+        foreach ($request['orderArray'] as $order){
+            $voucher = Voucher::find($order);
+            //$voucher->order = 2;
+           $voucher->order = $orderCount;
+            $voucher->save();
+            $orderCount = $orderCount + 1;
+        }
+        return $request['orderArray'];
         
     }
-    function csvToArray($filename = '', $delimiter = ',')
-    {
-        if (!file_exists($filename) || !is_readable($filename))
-            return false;
-    
-        $header = null;
-        $data = array();
-        if (($handle = fopen($filename, 'r')) !== false)
-        {
-            while (($row = fgetcsv($handle, 1000, $delimiter)) !== false)
-            {
-                if (!$header)
-                    $header = $row;
-                else
-                    $data[] = array_combine($header, $row);
-            }
-            fclose($handle);
-        }
-    
-        return $data;
-    }
+        
 }

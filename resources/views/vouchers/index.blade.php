@@ -65,7 +65,7 @@
                                         Redeem</button>
                                     @else
                                         <button class="btn greencode" onclick="location.href='http://{{$voucher->link}}'" type="button">
-                                             Visit Website
+                                             Visit Websit
                                         </button>
                                     @endif
                                 @else

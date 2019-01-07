@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'VoucherController@index');
+Route::get('vouchers/updateOrder', '\App\Http\Controllers\VoucherController@updateOrder')->name('updateOrder');
+
 
 Route::resource('vouchers', 'VoucherController');
 
@@ -20,6 +22,7 @@ Route::view('/about', 'about')->name('about');
 Route::view('/privacy-policy', 'privacy-policy')->name('policy');
 Route::view('/terms','terms')->name('terms');
 Route::get('/importpage', '\App\Http\Controllers\VoucherController@importPage')->name('importpage');
+
 
 Auth::routes();
 
@@ -30,3 +33,4 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name(
 Route::post('import', '\App\Http\Controllers\VoucherController@import')->name('import');
 
 Route::post('vouchers/redeem', '\App\Http\Controllers\VoucherController@redeem')->name('vouchers.redeem');
+Route::post('vouchers/saveOrder', '\App\Http\Controllers\VoucherController@saveOrder')->name('vouchers.saveOrder');
