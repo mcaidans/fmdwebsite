@@ -9,7 +9,7 @@
         @if(!empty($vouchers))
            
                 @foreach($vouchers as $voucher) 
-                <li class="col-sm-6 col-lg-4 col-xl-3" id="{{$voucher->id}}">
+                <li class="col-sm-6 col-lg-4 col-xl-1" id="{{$voucher->id}}">
                         <div class="card" style="margin-right:15px;padding:5px;">
                             <img class="card-img-top" class="img-fluid" src="{{url('storage/' . $voucher->image_location)}}" alt='{{$voucher->name}}'>
                         </div>
