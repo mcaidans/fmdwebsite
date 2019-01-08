@@ -60,8 +60,14 @@ class VoucherController extends Controller
      */
     public function create()
     {
-     //dd(public_path(), storage_path());   
-        return view('vouchers.create');
+        if($this->checkAdmin()){
+            return view('vouchers.create');
+        }
+        else
+        {
+            return redirect()->route('vouchers.index');
+        }
+        
     }
 
     /**
@@ -72,27 +78,31 @@ class VoucherController extends Controller
      */
     public function store(Request $request)
     {
-	//dd($request->file('image'));
-        $filename1 =  $request->file('image')->path();
+        if($this->checkAdmin()){
+            $filename1 =  $request->file('image')->path();
 
-	    $validated = $request->validate(Voucher::$rules);
-	    $filename = $request->file('image')->store('voucherimages', 'public');
-		    
-            //$oldFilePath = storage_path().'/app/public/' . $filename;
+    	    $validated = $request->validate(Voucher::$rules);
+    	    $filename = $request->file('image')->store('voucherimages', 'public');
+    		    
+                
             $oldFilePath = base_path().'/public/storage/' . $filename;
             $newFilePath = storage_path() . '/' . $filename;
             $move = File::move($oldFilePath, $newFilePath);
             
             
-			$voucher = new Voucher;
+    		$voucher = new Voucher;
             $voucher->name = $validated['name'];
-
+    
             $voucher->image_location = $filename;
             $voucher->description = '';
             $voucher->save();
-			
-			return redirect()->route('vouchers.create');
-
+    		
+    		return redirect()->route('vouchers.create');
+        }
+        else
+        {
+            return redirect()->route('vouchers.index');
+        }
         
     }
 
@@ -104,7 +114,7 @@ class VoucherController extends Controller
      */
     public function show($id)
     {
-        if(\Auth::check() && \Auth::user()->admin){
+        if($this->checkAdmin()){
             $voucher = Voucher::find($id);
             return view('vouchers.show')->with('voucher', $voucher);
         }
@@ -123,7 +133,7 @@ class VoucherController extends Controller
     public function edit($id)
     {
         
-        if(\Auth::check() && \Auth::user()->admin){
+        if($this->checkAdmin()){
             $voucher = Voucher::find($id);
             return view('vouchers.edit')->with('voucher', $voucher);
         }
@@ -153,36 +163,51 @@ class VoucherController extends Controller
      */
     public function destroy($id)
     {
-        $voucher = Voucher::find($id);
-        //dd(app_path()."/storage/app/".$voucher->image_location);
-        File::delete(public_path()."/".$voucher->image_location);
-        $voucher->delete();
-        return redirect()->route('vouchers.index');
+        if($this->checkAdmin()){
+            $voucher = Voucher::find($id);
+            File::delete(public_path()."/".$voucher->image_location);
+            $voucher->delete();
+            return redirect()->route('vouchers.index');
+        }
+        else
+        {
+            return redirect()->route('vouchers.index');
+        }
+        
 
     }
     
     public function importpage(){
-        return view('vouchers.importpage');
+        if($this->checkAdmin())
+            return view('vouchers.importpage');
+        else
+            return redirect()->route('vouchers.index');
+        
     }
     
     public function import(Request $request)
     {
-        $input = $request->all();
-        $images = array();
-        if($files=$request->file('images')){
-            foreach($files as $file){
-                $filename = $file->store('voucherimages', 'public');
-	            $oldFilePath = base_path().'/public/storage/' . $filename;
-	            $newFilePath = storage_path() . '/' . $filename;
-	            $move = File::move($oldFilePath, $newFilePath);
-                $voucher = new Voucher;
-                $voucher->name=$file->getClientOriginalName();
-                $voucher->image_location = $filename;//->store('voucherimages');
-                $voucher->description = '';
-                $voucher->save();
+        if($this->checkAdmin()){
+            $input = $request->all();
+            $images = array();
+            if($files=$request->file('images')){
+                foreach($files as $file){
+                    $filename = $file->store('voucherimages', 'public');
+    	            $oldFilePath = base_path().'/public/storage/' . $filename;
+    	            $newFilePath = storage_path() . '/' . $filename;
+    	            $move = File::move($oldFilePath, $newFilePath);
+                    $voucher = new Voucher;
+                    $voucher->name=$file->getClientOriginalName();
+                    $voucher->image_location = $filename;//->store('voucherimages');
+                    $voucher->description = '';
+                    $voucher->save();
+                }
             }
+            return redirect()->route('vouchers.index');
         }
-        return redirect()->route('vouchers.index');
+        else{
+            return redirect()->route('vouchers.index');
+        }
     }
     
     public function redeem(Request $request){
@@ -202,26 +227,38 @@ class VoucherController extends Controller
     }
     
      public function updateOrder(){
-         //dd('tt');
-        if(\Auth::check()){// && \Auth::user()->admin){
+        if($this->checkAdmin()){
             $vouchers = Voucher::all()->sortBy('order');
             return view('vouchers.updateorder')->with('vouchers', $vouchers);;
         }
-        dd('tt');
+        else{
+            return redirect()->route('vouchers.index');
+        }
     }
 
-    function saveOrder(Request $request){
-        //$orderArray = [];
-        $orderCount = 0;
-        foreach ($request['orderArray'] as $order){
-            $voucher = Voucher::find($order);
-            //$voucher->order = 2;
-           $voucher->order = $orderCount;
-            $voucher->save();
-            $orderCount = $orderCount + 1;
+    public function saveOrder(Request $request){
+        if($this->checkAdmin()){
+            $orderCount = 0;
+            foreach ($request['orderArray'] as $order){
+                $voucher = Voucher::find($order);
+                //$voucher->order = 2;
+               $voucher->order = $orderCount;
+                $voucher->save();
+                $orderCount = $orderCount + 1;
+            }
+            return $request['orderArray'];
         }
-        return $request['orderArray'];
+        else{
+            return redirect()->route('vouchers.index');
+        }
         
+    }
+    
+    function checkAdmin(){
+        if(\Auth::check() && \Auth::user()->admin)
+            return true;
+        else
+            return false;            
     }
         
 }

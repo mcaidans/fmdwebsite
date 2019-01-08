@@ -40,7 +40,13 @@
                     @if (Auth::check() && (Auth::user()->admin))
                         <li class="nav-item">
                             <a class="nav-link" href={{ route('vouchers.create') }}>Add New Voucher</a>
-                        </li>                      
+                        </li>  
+                        <li class="nav-item">
+                            <a class="nav-link" href={{ route('importpage') }}>Import Vouchers</a>
+                        </li>   
+                        <li class="nav-item">
+                            <a class="nav-link" href={{ route('vouchers.updateOrder') }}>Change Voucher Order</a>
+                        </li>   
                     @endif
                     </ul>
                 

@@ -19,11 +19,7 @@
         </ul>
         
         <input type="submit" value="saveOrder" onclick="saveOrder()">
-        <form style="margin-bottom:0px;" method="POST" action="{{ action('VoucherController@saveOrder') }}">
-                                        @csrf
-                                        <input type="hidden" name="orderArray[]" value="51">
-                                        <input type="submit">
-                                    </form>
+
                                     
     <script>
         $( function() {
@@ -31,12 +27,6 @@
             $( "#sortable" ).disableSelection();
         });
         
-        function sasveOrder(){
-            var orderArray = $("#sortable").sortable("toArray");
-            var jsonData = JSON.stringify(orderArray);
-            console.log(orderArray);
-            console.log(jsonData);
-        }
         function saveOrder(voucher_id, user_id){
             var orderArray = $("#sortable").sortable("toArray");
             var jsonData = orderArray; //JSON.stringify(orderArray);

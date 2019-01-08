@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'VoucherController@index');
-Route::get('vouchers/updateOrder', '\App\Http\Controllers\VoucherController@updateOrder')->name('updateOrder');
+Route::get('vouchers/updateOrder', '\App\Http\Controllers\VoucherController@updateOrder')->name('vouchers.updateOrder');
 
 
 Route::resource('vouchers', 'VoucherController');
