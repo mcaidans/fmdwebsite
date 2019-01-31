@@ -13,7 +13,7 @@ yarn-error.log
 /.env
 
 public/*
-
+storage/*
 composer.lock
 public/storage/voucherimages
 /app/GoPublic.php
