@@ -4,7 +4,6 @@
 
     <div class="row responsive-center">
         @if(!empty($vouchers))
-            
             @foreach($vouchers as $voucher) 
                 <div class="col-sm-6 col-lg-4 col-xl-3">
                     <div class="card" style=";margin-right:15px;padding:5px;">
@@ -77,10 +76,18 @@
                     </div>
                 </div>
             @endforeach
+            
         @endif
     </div>
+    <div class="text-center">
+                {{ $vouchers->links() }}
+            </div>
 
     <script>
+    $(document).ready(function () {
+        $(".pagination").rPage();
+    });
+
     function currentRedeem(voucher_id, user_id, times){
         $("#redeem-current-" + voucher_id).css("display", "inline");
         $("#redeem_btn_" + voucher_id).attr("disabled", "disabled");// + voucher_id).hide();

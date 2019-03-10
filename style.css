@@ -102,18 +102,6 @@ ul.center-text{
     margin-right: 0px;
 }
 
-.page-link{
-    color: black;
-}
-.page-item.active > .page-link {
-    background-color: #07AD4D;
-    border-color: #07AD4D;
-}
-.pagination{
-    margin: 10 auto 30 auto;
-    justify-content: center;
-}
-  
 @media (min-width: 576px){
         .redeem-text{
         font-size:28px;   

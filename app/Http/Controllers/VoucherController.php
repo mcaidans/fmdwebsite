@@ -29,7 +29,7 @@ class VoucherController extends Controller
         }else{
            $user = false;
         }
-        $vouchers = Voucher::all()->sortBy('order');
+        $vouchers = Voucher::orderBy('order')->paginate(12);
         foreach($vouchers as $voucher){
             if($user){
                 $redemption = $user->redeems()->where([
