@@ -23,6 +23,7 @@ Route::view('/privacy-policy', 'privacy-policy')->name('policy');
 Route::view('/terms','terms')->name('terms');
 Route::get('/importpage', '\App\Http\Controllers\VoucherController@importPage')->name('importpage');
 
+Route::get('/subwaynorth', '\App\Http\Controllers\VoucherController@subwaynorth')->name('subwaynorth');
 
 Auth::routes();
 

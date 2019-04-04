@@ -260,5 +260,10 @@ class VoucherController extends Controller
         else
             return false;            
     }
+    
+    function subwayNorth(){
+        $vouchers = Voucher::where('id', '>', 758)->paginate(10);
+        return view('vouchers.index')->with('vouchers', $vouchers);
+    }
         
 }
