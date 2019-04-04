@@ -262,7 +262,7 @@ class VoucherController extends Controller
     }
     
     function subwayNorth(){
-        $vouchers = Voucher::where('id', '>', 758)->paginate(10);
+        $vouchers = Voucher::whereRaw('id >= 758 and id <= 761')->paginate(10);
         return view('vouchers.index')->with('vouchers', $vouchers);
     }
         
