@@ -15,7 +15,12 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         
         <title>Gold Coast Discounts</title>
-        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <script type="text/javascript">
+                var captchaCallback = function() {
+                console.log('captchaready');
+            };
+        </script>
+        <script src='https://www.google.com/recaptcha/api.js?onload=captchaCallback&render=explicit' async defer></script>
     </head>
     <body>
         <div class="container" style="max-width:100%">
