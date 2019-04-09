@@ -33,7 +33,7 @@
                 <div class="form-group">
                 <textarea class="form-control" type="textarea" id="message" name="msg" placeholder="Message" maxlength="140" rows="7" required></textarea>                   
                 </div>
-                <div class="g-recaptcha" data-sitekey="{{env('CAPTCHA_SITE_KEY')}}" style="margin-bottom:10px;">
+                <div id="contactCaptcha" class="g-recaptcha" data-sitekey="6LcVJJ0UAAAAAKBxZUBruQYFaVnY8cOa_z_n9cWB">
                 </div>
                 
                 <input type="submit" id="submit" name="submit" class="btn btn-primary pull-right">  
