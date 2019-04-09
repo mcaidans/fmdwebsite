@@ -17,6 +17,10 @@ class AppServiceProvider extends ServiceProvider
             \URL::forceScheme('https');
         }
         \Schema::defaultStringLength(191);
+        \Validator::extend(
+          'recaptcha',
+          'App\\Recaptcha@validate'
+   );
     }
 
     /**

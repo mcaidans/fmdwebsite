@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <div class="row">
     <div class="col">        
     </div>
@@ -17,30 +17,44 @@
     <br>
     <h3 style="text-align: center;">Or</h3><br>
         <div class="form-area">  
-            <form role="form">
-                
+            <form method="POST" action="{{ url('contact') }}">
+                    {{ csrf_field() }}
 				<div class="form-group">
-					<input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+					<input type="text" class="form-control" name="name" placeholder="Name" required>
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" id="email" name="email" placeholder="Email">
+					<input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number">
+					<input type="phone" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number">
 				</div>
 				<div class="form-group">
 					<input type="text" class="form-control" id="subject" name="subject" placeholder="Subject">
 				</div>
                 <div class="form-group">
-                <textarea class="form-control" type="textarea" id="message" placeholder="Message" maxlength="140" rows="7"></textarea>
-                    <span class="help-block"><p id="characterLeft" class="help-block ">You have reached the limit</p></span>                    
+                <textarea class="form-control" type="textarea" id="message" name="msg" placeholder="Message" maxlength="140" rows="7" required></textarea>                   
                 </div>
-                <button type="button" id="submit" name="submit" class="btn btn-primary pull-right">Submit Form</button>
+                <div class="g-recaptcha" 
+                    data-sitekey="{{env('CAPTCHA_SITE_KEY')}}" style="margin-bottom:10px;" required>
+                </div>
+                
+                <input type="submit" id="submit" name="submit" class="btn btn-primary pull-right">  
             </form>
+            
         </div>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </div>
     
     <div class="col">
     </div>
 </div>
+
 @stop
