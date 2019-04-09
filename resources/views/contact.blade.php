@@ -2,7 +2,6 @@
 
 @section('content')
 
-<script src='https://www.google.com/recaptcha/api.js'></script>
 <div class="row">
     <div class="col">        
     </div>
@@ -34,8 +33,7 @@
                 <div class="form-group">
                 <textarea class="form-control" type="textarea" id="message" name="msg" placeholder="Message" maxlength="140" rows="7" required></textarea>                   
                 </div>
-                <div class="g-recaptcha" 
-                    data-sitekey="{{env('CAPTCHA_SITE_KEY')}}" style="margin-bottom:10px;" required>
+                <div class="g-recaptcha" data-sitekey="{{env('CAPTCHA_SITE_KEY')}}" style="margin-bottom:10px;">
                 </div>
                 
                 <input type="submit" id="submit" name="submit" class="btn btn-primary pull-right">  
