@@ -23,7 +23,7 @@
 					<input type="text" class="form-control" name="name" placeholder="Name" required>
 				</div>
 				<div class="form-group">
-					<input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+					<input type="email" class="form-control" name="email" placeholder="Email" required>
 				</div>
 				<div class="form-group">
 					<input type="phone" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number">
