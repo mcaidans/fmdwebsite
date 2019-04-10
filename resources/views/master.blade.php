@@ -64,7 +64,7 @@
                     @else
                         <!-- DROPDOWN START -->
                         <div class="dropdown {{ !$errors->isEmpty() ? 'show' : '' }}">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded={{ !$errors->isEmpty() ? 'true' : 'false' }}><b>Login</b> <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded={{ !$errors->isEmpty() ? 'true' : 'false' }}><b>Register / Login</b> <span class="caret"></span></a>
                         <div class="dropdown-menu dropdown-menu-right login-dp {{ !$errors->isEmpty() ? 'show' : '' }}">
         			
                             <div class="row">

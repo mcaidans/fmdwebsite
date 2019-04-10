@@ -5,13 +5,21 @@
 <div class="row">
     <div class="col">        
     </div>
-    
+    <style>
+        #contactCaptcha > div{
+             margin: 0 auto;   
+        }
+        .contact-submit{
+             display: block;
+             margin: 10px auto 0px auto;
+        }
+    </style>
     
     
     <div class="col-xs-12 col-sm-10 col-lg-6">
-        <h2>Contact Us</h2>
+        <h2 style="text-align:center">Contact Us</h2>
         <div class="call-box center-text">
-            <h3>Give us a call on <span style="color:blue; display:inline-block;">0425 638 428</span> </h3>
+            <h3>Give us a call on <a href="tel:+61425638428" style="color:blue; display:inline-block;">0425 638 428</a> </h3>
         </div>
     <br>
     <h3 style="text-align: center;">Or</h3><br>
@@ -36,7 +44,7 @@
                 <div id="contactCaptcha" class="g-recaptcha" data-sitekey="6LcVJJ0UAAAAAKBxZUBruQYFaVnY8cOa_z_n9cWB">
                 </div>
                 
-                <input type="submit" id="submit" name="submit" class="btn btn-primary pull-right">  
+                <input type="submit" name="submit" class="btn btn-primary pull-right contact-submit">  
             </form>
             
         </div>
