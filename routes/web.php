@@ -16,8 +16,9 @@ Route::get('vouchers/updateOrder', '\App\Http\Controllers\VoucherController@upda
 
 
 Route::resource('vouchers', 'VoucherController');
+Route::resource('contact', 'ContactController');
 
-Route::view('/contact', 'contact')->name('contact');
+//Route::view('/contact', 'contact')->name('contact');
 Route::view('/about', 'about')->name('about');
 Route::view('/privacy-policy', 'privacy-policy')->name('policy');
 Route::view('/terms','terms')->name('terms');

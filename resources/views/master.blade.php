@@ -15,6 +15,8 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         
         <title>Gold Coast Discounts</title>
+        
+        <script src='https://www.google.com/recaptcha/api.js' async defer></script>
     </head>
     <body>
         <div class="container" style="max-width:100%">
@@ -32,7 +34,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href={{ route('contact') }}>Contact Us</a>
+                        <a class="nav-link" href={{ route('contact.index') }}>Contact Us</a>
                     </li>
                     <!--<li class="nav-item">
                         <a class="nav-link" href={{ route('about') }}>About Us</a>
