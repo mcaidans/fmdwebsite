@@ -17,3 +17,9 @@ storage/*
 composer.lock
 public/storage/voucherimages
 /app/GoPublic.php
+
+/.env.example
+/.env.prod
+/.htaccess
+/php.ini
+/php_errors.log
