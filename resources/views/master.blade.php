@@ -33,7 +33,7 @@
                         <a class="nav-link" href={{ route('vouchers.index') }}>Vouchers <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="Advertise With Us.pdf">Advertise With Us</a>
+                        <a class="nav-link" href="advertise.pdf">Advertise With Us</a>
                     </li>
 
                     <li class="nav-item">
@@ -158,7 +158,7 @@
                         <h4>Information</h4>
                         <ul class="footer-link-list">
                             <li>
-                                <a class="footer-link" href="Advertise With Us.pdf" >Advertise with Us</a>
+                                <a class="footer-link" href="advertise.pdf" >Advertise with Us</a>
                             </li>
                             <li>
                                 <a class="footer-link" href={{ route('policy') }}>Privacy Policy</a>
