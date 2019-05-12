@@ -40,7 +40,7 @@
                         <a class="nav-link" href={{ route('contact.index') }}>Contact Us</a>
                     </li>
                     <li class="nav-item active">
-                    <a class="nav-link" href="LatestBrochure.pdf">Contact Us</a>
+                    <a class="nav-link" href="LatestBrochure.pdf">Latest Brochure</a>
                     </li>
                     <!--<li class="nav-item">
                         <a class="nav-link" href={{ route('about') }}>About Us</a>
